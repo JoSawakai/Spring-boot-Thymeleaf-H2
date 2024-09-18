@@ -25,6 +25,12 @@ public class AnnouncementController {
     @Autowired
     private AnnouncementService announcementService;
 
+    @GetMapping("/")
+    public String startPage(@RequestParam(value = "username", required = false) String username,
+            @RequestParam(value = "password", required = false) String password) {
+        return "login";
+    }
+
     @GetMapping("/oshirase")
     public String getUsers(Model model, //画面から以下のパラメーターをリクエスト
             @RequestParam(value = "title", required = false) String title,

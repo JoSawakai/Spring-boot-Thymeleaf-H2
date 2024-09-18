@@ -1,7 +1,13 @@
 h1 {
-  font-size: 18pt;
+  font-size: 24pt;
   font-weight: bold;
-  margin: 0px;
+  margin-top: 30px;
+  margin-left: 40vw;
+}
+
+h3 {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 body {
@@ -20,11 +26,11 @@ tfoot {
   background-color: rgb(228 240 245);
 }
 
-label {
+/* label {
   display: inline-block;
   width: 150px;
   margin-bottom: 10px;
-}
+} */
 label[type="mid"] {
   display: inline-block;
   width: 130px;
@@ -32,14 +38,42 @@ label[type="mid"] {
   margin-bottom: 10px;
 }
 input[type="text"],
-input[type="date"],
-select {
+input[type="date"] {
   width: 200px;
   padding: 5px;
 }
+select {
+  width: 214px;
+  padding: 5px;
+}
+
+.label_input {
+  display: inline-block;
+  width: 150px;
+  margin-bottom: 10px;
+}
+.label_input_dia {
+  display: inline-block;
+  width: 150px;
+  margin-bottom: 10px;
+  margin-left: 50px;
+  vertical-align: top;
+}
+
+.label_kugiri {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
 button {
   font-size: 17px;
   width: 120px;
+  margin-left: 0px;
+}
+.button_gp {
+  font-size: 17px;
+  width: 120px;
+  margin-top: 20px;
   margin-left: 120px;
 }
 
@@ -47,7 +81,7 @@ button {
   font-size: 17px;
   width: 120px;
   margin-top: 50px;
-  margin-left: 20px;
+  margin-left: 120px;
 }
 
 .search-container {
@@ -63,7 +97,8 @@ button {
 }
 table {
   /* width: 100%; */
-  width: 80vw;
+  width: 70vw;
+  max-width: 1400px;
   border-collapse: collapse;
   margin-top: 0px;
 }
@@ -85,6 +120,30 @@ td {
 th {
   height: 20px;
   background-color: #f2f2f2;
+}
+
+.td_1 {
+  width: 25px;
+}
+
+.td_2 {
+  width: 30vw;
+  /* max-width: 600px; */
+}
+
+.td_3 {
+  width: 9vw;
+  max-width: 110px;
+}
+
+.td_4 {
+  width: 20vw;
+  max-width: 130px;
+}
+
+.td_5 {
+  width: 15vw;
+  max-width: 250px;
 }
 
 pre {
@@ -121,4 +180,128 @@ caption {
   background-color: #007bff;
   color: white;
   border-color: #007bff;
+}
+
+/* 背景を暗くするオーバーレイ */
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 中央に表示されるダイアログ */
+#registerDialog {
+  position: relative;
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 50vw;
+  max-width: 500px;
+  height: 40vw;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+#overlay_upd {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 中央に表示されるダイアログ */
+#updateDialog {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 50vw;
+  max-width: 500px;
+  height: 40vw;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+#overlay_del {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 中央に表示されるダイアログ */
+#deleteDialog {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 50vw;
+  max-width: 500px;
+  height: 40vw;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.form_div {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;
+}
+
+.input_btn {
+  margin-left: 60vw; /* 将按钮推到右侧 */
+  display: block;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap; /* 允许在小屏幕时换行 */
+  align-items: center; /* 让输入框和label垂直居中对齐 */
+  gap: 10px; /* 控制元素之间的间距 */
+}
+
+.form-row label {
+  min-width: 10px; /* 给label一个固定宽度，使文本框对齐 */
+}
+
+.form-row input {
+  flex-grow: 1; /* 让文本框填充剩余空间 */
+  min-width: 200px; /* 最小宽度200px */
+  max-width: 200px; /* 控制最大宽度，防止太宽 */
+}
+
+@media (max-width: 600px) {
+  .form-row {
+    flex-direction: column; /* 在小屏幕时垂直排列 */
+    align-items: flex-start; /* 让label和输入框左对齐 */
+  }
+}
+
+.enddate_input {
+  margin-left: 205px;
+}
+
+.dia_btn {
+  position: absolute; /* 使用绝对定位 */
+  left: 50%; /* 水平居中父容器 */
+  transform: translate(-50%, -50%); /* 按钮容器中心对齐 */
+  display: flex; /* 使用flex来排列按钮 */
+  gap: 30px; /* 按钮之间的间距 */
+  margin-top: 30px;
+}
+
+textarea {
+  width: 210px; /* 设置宽度为100% */
+  height: 100px; /* 设置高度 */
 }
