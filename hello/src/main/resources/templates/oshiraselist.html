@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
+    <meta charset="UTF-8" />
     <title>お知らせ</title>
     <link rel="stylesheet" href="result.css" />
   </head>
@@ -726,22 +727,31 @@
 
         let inputText = title.value;
         let totalLength = 0; // 文字数計算
+        let hankaku = 1;
+        let zenkaku = 2;
 
         for (let i = 0; i < inputText.length; i++) {
           const char = inputText[i];
 
-          // 漢字判断
-          if (char.match(/[\u4e00-\u9fa5]/)) {
-            totalLength += 1; // 漢字が1
+          if (char.match(/[\u0061-\u007A]/)) {
+            totalLength += hankaku; // 小文字
+          } else if (char.match(/[\u0041-\u005A]/)) {
+            totalLength += hankaku; // 大文字
+          } else if (char.match(/[\u0030-\u0039]/)) {
+            charLength += hankaku; // 数字
+          } else if (char.match(/[\u0020-\u007E]/)) {
+            charLength += hankaku; // 記号
           } else {
-            totalLength += 0.5; // 英数字が0.5
+            totalLength += zenkaku; // 以外すべて
           }
         }
 
         // 漢字50文字、英数字100文字に制限
-        if (totalLength > 50) {
-          alert("タイトルに100文字以下で入力してください。");
-          title.value = truncateInput(inputText, 50);
+        if (totalLength > 100) {
+          alert(
+            "EXXX3: タイトルは漢字50文字、または半角英数字100文字以内で入力してください。"
+          );
+          title.value = truncateInput(inputText, 100);
         }
       }
       function truncateInput(inputText, maxLength) {
@@ -750,17 +760,28 @@
 
         for (let i = 0; i < inputText.length; i++) {
           const char = inputText[i];
-          if (char.match(/[\u4e00-\u9fa5]/)) {
-            totalLength += 1;
+          let charLength = 0;
+          let hankaku = 1;
+          let zenkaku = 2;
+
+          if (char.match(/[\u0061-\u007A]/)) {
+            charLength = hankaku; // 大文字
+          } else if (char.match(/[\u0041-\u005A]/)) {
+            charLength = hankaku; // 小文字
+          } else if (char.match(/[\u0030-\u0039]/)) {
+            charLength = hankaku; // 数字
+          } else if (char.match(/[\u0020-\u007E]/)) {
+            charLength = hankaku; // 記号
           } else {
-            totalLength += 0.5;
+            charLength = zenkaku; // 以外すべて
           }
 
-          if (totalLength <= maxLength) {
-            validText += char;
-          } else {
+          if (totalLength + charLength > maxLength) {
             break;
           }
+
+          validText += char;
+          totalLength += charLength;
         }
         return validText;
       }
