@@ -11,7 +11,8 @@ h3 {
 }
 
 body {
-  /* font-family: Arial, sans-serif; */
+  font-family: Arial, sans-serif;
+  /* background-color: #f0f0f0; */
   /* margin: 20px; */
   font-size: 13;
   margin: 5px 25px;
@@ -61,7 +62,7 @@ select {
 }
 
 .label_kugiri {
-  display: inline-block;
+  /* display: inline-block; */
   margin-bottom: 10px;
 }
 
@@ -70,18 +71,98 @@ button {
   width: 120px;
   margin-left: 0px;
 }
-.button_gp {
+
+.sub_button_search {
   font-size: 17px;
-  width: 120px;
-  margin-top: 20px;
+  width: 130px;
   margin-left: 120px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: white;
+  border: none;
+  outline: none;
+  box-shadow: 0 0 10px rgba(129, 199, 212, 0.5); /* シャドウ色 */
+  transition: box-shadow 0.3s ease; /* ボタン動画 */
+  background-color: #58b2dc; /* ボタン色 */
+  cursor: pointer;
+}
+.sub_button_search:focus {
+  /*ボタンフォーカス後 */
+  outline: none;
+  box-shadow: 0 0 10px 2px rgba(17, 50, 133, 0.5);
+}
+.sub_button_search:hover {
+  /* マウスがボタンに止めている */
+  box-shadow: 0 0 10px 3px rgba(0, 92, 157, 0.7);
 }
 
-.sub_button {
+.sub_button_reg {
   font-size: 17px;
-  width: 120px;
+  width: 130px;
   margin-top: 50px;
   margin-left: 120px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: white;
+  border: none;
+  outline: none;
+  box-shadow: 0 0 10px rgba(168, 216, 185, 0.8);
+  transition: box-shadow 0.3s ease;
+  background-color: #86c166;
+  cursor: pointer;
+}
+.sub_button_reg:focus {
+  outline: none;
+  box-shadow: 0 0 10px 2px rgba(45, 109, 75, 0.5);
+}
+.sub_button_reg:hover {
+  box-shadow: 0 0 10px 3px rgba(93, 172, 129, 0.8);
+}
+
+.sub_button_upd {
+  font-size: 17px;
+  width: 130px;
+  margin-top: 50px;
+  margin-left: 120px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: white;
+  border: none;
+  outline: none;
+  box-shadow: 0 0 10px rgba(250, 214, 127, 0.9);
+  transition: box-shadow 0.3s ease;
+  background-color: #efbb24;
+  cursor: pointer;
+}
+.sub_button_upd:focus {
+  outline: none;
+  box-shadow: 0 0 10px 2px rgba(202, 122, 44, 0.9);
+}
+.sub_button_upd:hover {
+  box-shadow: 0 0 10px 3px rgba(255, 177, 27, 0.8);
+}
+
+.sub_button_del {
+  font-size: 17px;
+  width: 130px;
+  margin-top: 50px;
+  margin-left: 120px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: white;
+  border: none;
+  outline: none;
+  box-shadow: 0 0 10px rgba(232, 122, 144, 0.8);
+  transition: box-shadow 0.3s ease;
+  background-color: #cb1b45;
+  cursor: pointer;
+}
+.sub_button_del:focus {
+  outline: none;
+  box-shadow: 0 0 10px 2px rgba(232, 48, 21, 0.5);
+}
+.sub_button_del:hover {
+  box-shadow: 0 0 10px 3px rgba(208, 16, 76, 0.7);
 }
 
 .search-container {
@@ -96,20 +177,11 @@ button {
   padding: 0 10px;
 }
 table {
-  /* width: 100%; */
   width: 70vw;
   max-width: 1400px;
   border-collapse: collapse;
   margin-top: 0px;
 }
-
-/* table {
-  border-collapse: collapse;
-  border: 2px solid rgb(140 140 140);
-  font-family: sans-serif;
-  font-size: 0.8rem;
-  letter-spacing: 1px;
-} */
 
 th,
 td {
@@ -128,7 +200,6 @@ th {
 
 .td_2 {
   width: 30vw;
-  /* max-width: 600px; */
 }
 
 .td_3 {
@@ -260,48 +331,98 @@ caption {
 }
 
 .input_btn {
-  margin-left: 60vw; /* 将按钮推到右侧 */
+  margin-left: 60vw; /* ボタンを右寄せ */
   display: block;
 }
 
+/* ウインドウサイズ適用 */
 .form-row {
   display: flex;
-  flex-wrap: wrap; /* 允许在小屏幕时换行 */
-  align-items: center; /* 让输入框和label垂直居中对齐 */
-  gap: 10px; /* 控制元素之间的间距 */
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
 }
 
 .form-row label {
-  min-width: 10px; /* 给label一个固定宽度，使文本框对齐 */
+  min-width: 10px;
 }
 
 .form-row input {
-  flex-grow: 1; /* 让文本框填充剩余空间 */
-  min-width: 200px; /* 最小宽度200px */
-  max-width: 200px; /* 控制最大宽度，防止太宽 */
+  flex-grow: 1;
+  min-width: 200px;
+  max-width: 200px;
 }
 
 @media (max-width: 600px) {
   .form-row {
-    flex-direction: column; /* 在小屏幕时垂直排列 */
-    align-items: flex-start; /* 让label和输入框左对齐 */
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 
 .enddate_input {
-  margin-left: 205px;
+  margin-left: 204px;
 }
 
 .dia_btn {
-  position: absolute; /* 使用绝对定位 */
-  left: 50%; /* 水平居中父容器 */
-  transform: translate(-50%, -50%); /* 按钮容器中心对齐 */
-  display: flex; /* 使用flex来排列按钮 */
-  gap: 30px; /* 按钮之间的间距 */
+  position: absolute; /*  ダイアログに対しての位置 */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 30px;
   margin-top: 30px;
 }
 
+.dia_btn_com {
+  padding: 5px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  color: white;
+}
+
+.dia_close_btn {
+  background-color: #58b2dc; /* 青い背景色 */
+  box-shadow: 0 4px 8px rgba(129, 199, 212, 0.5); /* 青いシャドウ */
+}
+
+.dia_close_btn:hover {
+  box-shadow: 0 6px 12px rgba(0, 92, 157, 0.7); /* 濃い目シャドウ */
+}
+
+.dia_reg_btn {
+  background-color: #86c166;
+  box-shadow: 0 4px 8px rgba(168, 216, 185, 0.8);
+}
+
+.dia_reg_btn:hover {
+  box-shadow: 0 6px 12px rgba(93, 172, 129, 0.8);
+}
+
+.dia_upd_btn {
+  background-color: #efbb24;
+  box-shadow: 0 4px 8px rgba(250, 214, 127, 0.9);
+}
+
+.dia_upd_btn:hover {
+  box-shadow: 0 6px 12px rgba(255, 177, 27, 0.8);
+}
+
+.dia_del_btn {
+  background-color: #ff4d4d;
+  box-shadow: 0 4px 8px rgba(255, 77, 77, 0.5);
+}
+
+.dia_del_btn:hover {
+  box-shadow: 0 6px 12px rgba(255, 77, 77, 0.7);
+}
+
 textarea {
-  width: 210px; /* 设置宽度为100% */
-  height: 100px; /* 设置高度 */
+  width: 210px;
+  height: 100px;
+}
+
+.required-asterisk {
+  color: red;
+  margin-left: 5px;
 }

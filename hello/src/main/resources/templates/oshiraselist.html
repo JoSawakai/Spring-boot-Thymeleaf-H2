@@ -46,7 +46,7 @@
           />
         </div>
 
-        <div class="form-row">
+        <div>
           <label class="label_input" for="startDate">適用期間:</label>
           <input
             type="date"
@@ -54,7 +54,7 @@
             name="startDate"
             th:value="${startDate}"
           />
-          <label class="label_kugiri" for="endDate">~</label>
+          <label for="endDate">~</label>
           <input
             type="date"
             id="endDate"
@@ -62,17 +62,22 @@
             th:value="${endDate}"
           />
         </div>
-      </div>
-      <div>
-        <button type="submit" class="input_btn" id="submitButton">
-          Search
-        </button>
+
+        <div>
+          <button
+            type="submit"
+            class="input_btn sub_button_search"
+            id="submitButton"
+          >
+            検索
+          </button>
+        </div>
       </div>
     </form>
 
     <table border="1">
       <thead>
-        <tr border="0">
+        <tr>
           <th colspan="4">
             <a>検索結果</a>
           </th>
@@ -113,8 +118,8 @@
           </th>
         </tr>
         <tr>
-          <th></th>
-          <th>お知らせタイトル</th>
+          <th colspan="2" style="text-indent: 3em">お知らせタイトル</th>
+          <!-- <th>お知らせタイトル</th> -->
           <th>お知らせ区分</th>
           <th>掲載日</th>
           <th>適用期間</th>
@@ -154,7 +159,7 @@
       </tbody>
     </table>
 
-    <button class="sub_button" type="button" id="openDialogButton_reg">
+    <button class="sub_button_reg" type="button" id="openDialogButton_reg">
       データ登録
     </button>
     <!-- ダイアログ -->
@@ -171,7 +176,10 @@
           />
           <input type="hidden" name="searchStartDate" th:value="${startDate}" />
           <input type="hidden" name="searchEndDate" th:value="${endDate}" />
-          <label for="dialogTitle" class="label_input_dia">タイトル:</label>
+          <label for="dialogTitle" class="label_input_dia"
+            >タイトル:
+            <span class="required-asterisk">*</span>
+          </label>
           <input
             type="text"
             id="dialogTitle"
@@ -180,8 +188,9 @@
           /><br /><br />
 
           <label for="dialogCategory" class="label_input_dia"
-            >タイトル区分:</label
-          >
+            >タイトル区分:
+            <span class="required-asterisk">*</span>
+          </label>
           <select id="dialogCategory" name="dialogCategory" required>
             <option value="">--Select an category--</option>
             <!-- デフォルト：ブランク -->
@@ -194,8 +203,9 @@
           <br /><br />
 
           <label for="dialogInfomessage" class="label_input_dia"
-            >お知らせ内容:</label
-          >
+            >お知らせ内容:
+            <span class="required-asterisk">*</span>
+          </label>
           <textarea
             id="dialogInfomessage"
             name="dialogInfomessage"
@@ -204,8 +214,9 @@
           <br /><br />
 
           <label for="dialogRegistrationDate" class="label_input_dia"
-            >掲載日:</label
-          >
+            >掲載日:
+            <span class="required-asterisk">*</span>
+          </label>
           <input
             type="date"
             id="dialogRegistrationDate"
@@ -214,7 +225,10 @@
           />
           <br /><br />
 
-          <label for="dialogStartDate" class="label_input_dia">適用期間:</label>
+          <label for="dialogStartDate" class="label_input_dia"
+            >適用期間:
+            <span class="required-asterisk">*</span>
+          </label>
           <input
             type="date"
             id="dialogStartDate"
@@ -231,14 +245,26 @@
           />
           <br /><br />
           <div class="dia_btn">
-            <button type="submit" id="submission">登録</button>
-            <button type="button" id="closeDialogButton_reg">閉じる</button>
+            <button
+              type="submit"
+              id="submission"
+              class="dia_btn_com dia_reg_btn"
+            >
+              登録
+            </button>
+            <button
+              type="button"
+              id="closeDialogButton_reg"
+              class="dia_btn_com dia_close_btn"
+            >
+              閉じる
+            </button>
           </div>
         </form>
       </div>
     </div>
 
-    <button class="sub_button" type="button" id="openDialogButton_upd">
+    <button class="sub_button_upd" type="button" id="openDialogButton_upd">
       データ変更
     </button>
     <!-- ダイアログ -->
@@ -262,7 +288,10 @@
           <br /><br />
 
           <!-- <input type="hidden" id="Id_upd" name="Id_upd" /> -->
-          <label for="dialogTitle_upd" class="label_input_dia">タイトル:</label>
+          <label for="dialogTitle_upd" class="label_input_dia"
+            >タイトル:
+            <span class="required-asterisk">*</span>
+          </label>
           <input
             type="text"
             id="dialogTitle_upd"
@@ -272,8 +301,9 @@
           <br /><br />
 
           <label for="dialogCategory_upd" class="label_input_dia"
-            >タイトル区分:</label
-          >
+            >タイトル区分:
+            <span class="required-asterisk">*</span>
+          </label>
           <select id="dialogCategory_upd" name="dialogCategory_upd" required>
             <option value="">--Select an category--</option>
             <!-- デフォルト：ブランク -->
@@ -286,8 +316,9 @@
           <br /><br />
 
           <label for="dialogRegistrationDate_upd" class="label_input_dia"
-            >掲載日:</label
-          >
+            >掲載日:
+            <span class="required-asterisk">*</span>
+          </label>
           <input
             type="date"
             id="dialogRegistrationDate_upd"
@@ -297,8 +328,9 @@
           <br /><br />
 
           <label for="dialogStartDate_upd" class="label_input_dia"
-            >適用期間:</label
-          >
+            >適用期間:
+            <span class="required-asterisk">*</span>
+          </label>
           <input
             type="date"
             id="dialogStartDate_upd"
@@ -315,21 +347,26 @@
           />
           <br /><br />
           <div class="dia_btn">
-            <button type="submit" id="submission">変更</button>
-            <button type="button" id="closeDialogButton_upd">閉じる</button>
+            <button
+              type="submit"
+              id="submission"
+              class="dia_btn_com dia_upd_btn"
+            >
+              変更
+            </button>
+            <button
+              type="button"
+              id="closeDialogButton_upd"
+              class="dia_btn_com dia_close_btn"
+            >
+              閉じる
+            </button>
           </div>
         </form>
       </div>
     </div>
 
-    <!-- <form th:action="@{/oshirase/delete}" method="post" style="display: inline"> -->
-    <!-- <input type="hidden" id=" deleteFlg" name="deleteFlg"/> -->
-    <!-- <button class="sub_button" type="submit" id="deleteFlg_btn">
-        データ削除
-      </button>
-      <input type="hidden" id="id_del" name="id_del" readonly />
-    </form> -->
-    <button class="sub_button" type="button" id="openDialogButton_del">
+    <button class="sub_button_del" type="button" id="openDialogButton_del">
       データ削除
     </button>
     <!-- ダイアログ -->
@@ -395,8 +432,20 @@
           />
           <br /><br />
           <div class="dia_btn">
-            <button type="submit" id="submission">削除</button>
-            <button type="button" id="closeDialogButton_del">閉じる</button>
+            <button
+              type="submit"
+              id="submission"
+              class="dia_btn_com dia_del_btn"
+            >
+              削除
+            </button>
+            <button
+              type="button"
+              id="closeDialogButton_del"
+              class="dia_btn_com dia_close_btn"
+            >
+              閉じる
+            </button>
           </div>
         </form>
       </div>
