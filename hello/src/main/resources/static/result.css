@@ -5,6 +5,18 @@ h1 {
   margin-left: 40vw;
 }
 
+.no-underline {
+  text-decoration: none;
+  color: inherit;
+}
+
+.no-underline:hover,
+.no-underline:focus,
+.no-underline:active {
+  text-decoration: none;
+  color: inherit;
+}
+
 h3 {
   text-align: center;
   margin-bottom: 20px;

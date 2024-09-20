@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="result.css" />
   </head>
   <body>
-    <h1>お知らせ</h1>
+    <h1><a th:href="@{/oshirase}" class="no-underline">お知らせ</a></h1>
     <form action="/oshirase" method="get">
       <div class="form_div">
         <div>
@@ -155,7 +155,7 @@
           <!-- <td th:text="${record.id}"></td> -->
         </tr>
         <tr th:if="${oshirase.size() == 0}">
-          <td colspan="6">検索対象が存在しません。</td>
+          <td colspan="6">EXXX2:検索対象が存在しません。</td>
         </tr>
       </tbody>
     </table>
@@ -373,8 +373,17 @@
     <!-- ダイアログ -->
     <div id="overlay_del">
       <div id="deleteDialog">
-        <h3>削除してもよろしいですか？</h3>
+        <h3>I0103:削除してもよろしいですか？</h3>
         <form th:action="@{/oshirase/delete}" method="post" id="deleteForm">
+          <input type="hidden" name="searchTitle" th:value="${title}" />
+          <input type="hidden" name="searchCategory" th:value="${category}" />
+          <input
+            type="hidden"
+            name="searchRegistrationDate"
+            th:value="${registrationDate}"
+          />
+          <input type="hidden" name="searchStartDate" th:value="${startDate}" />
+          <input type="hidden" name="searchEndDate" th:value="${endDate}" />
           <input type="hidden" id=" deleteFlg" name="deleteFlg" />
           <label for="id_del" class="label_input_dia">ID</label>
           <input type="text" id="id_del" name="id_del" readonly />
@@ -438,14 +447,14 @@
               id="submission"
               class="dia_btn_com dia_del_btn"
             >
-              削除
+              はい
             </button>
             <button
               type="button"
               id="closeDialogButton_del"
               class="dia_btn_com dia_close_btn"
             >
-              閉じる
+              いいえ
             </button>
           </div>
         </form>
@@ -455,6 +464,7 @@
     <script>
       const submitButton = document.getElementById("submitButton");
       const dateForm = document.getElementById("dateForm");
+      const registrationDateInput = document.getElementById("registrationDate");
       const startDateInput = document.getElementById("startDate");
       const endDateInput = document.getElementById("endDate");
 
@@ -484,10 +494,19 @@
 
       // ラジオボタン監視
       submitButton.addEventListener("click", function (event) {
+        const registrationDateValue = registrationDateInput.value;
         const startDateValue = startDateInput.value;
         const endDateValue = endDateInput.value;
 
         // 入力値があるテキストボックスをチェック
+        if (registrationDateValue && !isValidDate(registrationDateValue)) {
+          alert(
+            "EXXXX4:適用開始日に入力された日時の形式が不正です。(YYYY-MM-DD)"
+          );
+          event.preventDefault(); // フォームの提出をキャンセル
+          return;
+        }
+
         if (startDateValue && !isValidDate(startDateValue)) {
           alert(
             "EXXXX4:適用開始日に入力された日時の形式が不正です。(YYYY-MM-DD)"
@@ -619,7 +638,7 @@
             document.getElementById("overlay_upd").style.display = "flex";
           } else {
             // 行が選択されていない場合ワーニング表示
-            alert("行を選択してください。");
+            alert("EXXX1:行を選択してください。");
             event.preventDefault();
           }
         });
@@ -684,7 +703,7 @@
             document.getElementById("overlay_del").style.display = "flex";
           } else {
             // 行が選択されていない場合ワーニング表示
-            alert("行を選択してください。");
+            alert("E0404:行を選択してください。");
             event.preventDefault();
           }
         });
@@ -703,21 +722,21 @@
       registerform.addEventListener("submit", function (event) {
         event.preventDefault(); // ボタン押下後のフォーム提出を止める
 
-        alert("処理が完了しました。"); // 提出成功メッセージ
+        alert("I1002:処理が完了しました。"); // 提出成功メッセージ
         registerform.submit(); // フォーム提出
       });
 
       updateform.addEventListener("submit", function (event) {
         event.preventDefault(); // ボタン押下後のフォーム提出を止める
 
-        alert("処理が完了しました。"); // 提出成功メッセージ
+        alert("I1002:処理が完了しました。"); // 提出成功メッセージ
         updateform.submit(); // フォーム提出
       });
 
       deleteform.addEventListener("submit", function (event) {
         event.preventDefault(); // ボタン押下後のフォーム提出を止める
 
-        alert("処理が完了しました。"); // 提出成功メッセージ
+        alert("I1002:処理が完了しました。"); // 提出成功メッセージ
         deleteform.submit(); // フォーム提出
       });
 
