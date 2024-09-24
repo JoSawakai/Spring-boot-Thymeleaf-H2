@@ -757,9 +757,9 @@
           } else if (char.match(/[\u0041-\u005A]/)) {
             totalLength += hankaku; // 大文字
           } else if (char.match(/[\u0030-\u0039]/)) {
-            charLength += hankaku; // 数字
+            totalLength += hankaku; // 数字
           } else if (char.match(/[\u0020-\u007E]/)) {
-            charLength += hankaku; // 記号
+            totalLength += hankaku; // 記号
           } else {
             totalLength += zenkaku; // 以外すべて
           }
