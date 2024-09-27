@@ -7,7 +7,7 @@
   </head>
   <body>
     <h1><a th:href="@{/oshirase}" class="no-underline">お知らせ</a></h1>
-    <form action="/oshirase" method="get">
+    <form action="/oshirase" method="get" id="dateForm">
       <div class="form_div">
         <div>
           <label class="label_input" for="title">タイトル:</label>
@@ -16,7 +16,7 @@
             id="title"
             name="title"
             placeholder="Enter title"
-            oninput="checkInput()"
+            oninput="checkInput('title')"
             th:value="${title}"
           />
         </div>
@@ -54,6 +54,7 @@
             id="startDate"
             name="startDate"
             th:value="${startDate}"
+            style="margin-bottom: 5px"
           />
           <label for="endDate">~</label>
           <input
@@ -68,7 +69,7 @@
           <button
             type="submit"
             class="input_btn sub_button_search"
-            id="submitButton"
+            id="searchButton"
           >
             検索
           </button>
@@ -97,8 +98,11 @@
             >
               &lt;
             </a>
-            <span
+            <!-- <span
               th:text="'Page ' + (${currentPage} + 1) + ' / ' + ${totalPages}"
+            ></span> -->
+            <span
+              th:text="${totalPages > 0} ? 'Page ' + (${currentPage} + 1) + ' / ' + ${totalPages} : 'Page 0 / 0'"
             ></span>
             <a
               th:if="${currentPage < totalPages - 1}"
@@ -185,6 +189,7 @@
             type="text"
             id="dialogTitle"
             name="dialogTitle"
+            oninput="checkInput('dialogTitle')"
             required
           /><br /><br />
 
@@ -248,7 +253,7 @@
           <div class="dia_btn">
             <button
               type="submit"
-              id="submission"
+              id="registerbutton"
               class="dia_btn_com dia_reg_btn"
             >
               登録
@@ -297,6 +302,7 @@
             type="text"
             id="dialogTitle_upd"
             name="dialogTitle_upd"
+            oninput="checkInput('dialogTitle_upd')"
             required
           />
           <br /><br />
@@ -350,7 +356,7 @@
           <div class="dia_btn">
             <button
               type="submit"
-              id="submission"
+              id="updatebutton"
               class="dia_btn_com dia_upd_btn"
             >
               変更
@@ -462,11 +468,32 @@
     </div>
 
     <script>
-      const submitButton = document.getElementById("submitButton");
+      //検索
+      const searchButton = document.getElementById("searchButton");
       const dateForm = document.getElementById("dateForm");
       const registrationDateInput = document.getElementById("registrationDate");
       const startDateInput = document.getElementById("startDate");
       const endDateInput = document.getElementById("endDate");
+
+      //登録
+      const registerbutton = document.getElementById("registerbutton");
+      const registerForm = document.getElementById("registerForm");
+      const dialogRegistrationDate = document.getElementById(
+        "dialogRegistrationDate"
+      );
+      const dialogStartDate = document.getElementById("dialogStartDate");
+      const dialogEndDate = document.getElementById("dialogEndDate");
+
+      //変更
+      const updatebutton = document.getElementById("updatebutton");
+      const updateForm = document.getElementById("updateForm");
+      const dialogRegistrationDate_upd = document.getElementById(
+        "dialogRegistrationDate_upd"
+      );
+      const dialogStartDate_upd = document.getElementById(
+        "dialogStartDate_upd"
+      );
+      const dialogEndDate_upd = document.getElementById("dialogEndDate_upd");
 
       // 年月日チェック
       function isValidDate(dateString) {
@@ -492,17 +519,19 @@
         );
       }
 
-      // ラジオボタン監視
-      submitButton.addEventListener("click", function (event) {
+      // 検索ボタン日付チェック
+      searchButton.addEventListener("click", function (event) {
         const registrationDateValue = registrationDateInput.value;
         const startDateValue = startDateInput.value;
         const endDateValue = endDateInput.value;
 
+        console.log("Registration Date:", registrationDateValue);
+        console.log("Start Date:", startDateValue);
+        console.log("End Date:", endDateValue);
+
         // 入力値があるテキストボックスをチェック
         if (registrationDateValue && !isValidDate(registrationDateValue)) {
-          alert(
-            "EXXXX4:適用開始日に入力された日時の形式が不正です。(YYYY-MM-DD)"
-          );
+          alert("EXXXX4:掲載日に入力された日時の形式が不正です。(YYYY-MM-DD)");
           event.preventDefault(); // フォームの提出をキャンセル
           return;
         }
@@ -523,8 +552,114 @@
           return;
         }
 
+        if (startDateValue && endDateValue) {
+          const startDate = new Date(startDateValue);
+          const endDate = new Date(endDateValue);
+          if (startDate > endDate) {
+            alert("EXXX5:開始日は終了日より遡及することはできません。");
+            event.preventDefault(); // フォームの提出をキャンセル
+            return;
+          }
+        }
+
         // 年月日問題がなければフォームを提出
-        dateForm.submit();
+        // dateForm.submit();
+      });
+
+      // 登録ボタン日付チェック
+      registerbutton.addEventListener("click", function (event) {
+        const dialogRegistrationDateValue = dialogRegistrationDate.value;
+        const dialogStartDateValue = dialogStartDate.value;
+        const dialogEndDateValue = dialogEndDate.value;
+
+        // 入力値があるテキストボックスをチェック
+        if (
+          dialogRegistrationDateValue &&
+          !isValidDate(dialogRegistrationDateValue)
+        ) {
+          alert("EXXXX4:掲載日に入力された日時の形式が不正です。(YYYY-MM-DD)");
+          event.preventDefault(); // フォームの提出をキャンセル
+          return;
+        }
+
+        if (dialogStartDateValue && !isValidDate(dialogStartDateValue)) {
+          alert(
+            "EXXXX4:適用開始日に入力された日時の形式が不正です。(YYYY-MM-DD)"
+          );
+          event.preventDefault(); // フォームの提出をキャンセル
+          return;
+        }
+
+        if (dialogEndDateValue && !isValidDate(dialogEndDateValue)) {
+          alert(
+            "EXXXX4:適用終了日に入力された日時の形式が不正です。(YYYY-MM-DD)"
+          );
+          event.preventDefault(); // フォームの提出をキャンセル
+          return;
+        }
+
+        if (dialogStartDateValue && dialogEndDateValue) {
+          const startDate = new Date(dialogStartDateValue);
+          const endDate = new Date(dialogEndDateValue);
+          if (startDate > endDate) {
+            alert("EXXX5:開始日は終了日より遡及することはできません。");
+            event.preventDefault(); // フォームの提出をキャンセル
+            return;
+          }
+        }
+
+        // 年月日問題がなければフォームを提出
+        // registerForm.submit();
+      });
+
+      // 変更ボタン日付チェック
+      updatebutton.addEventListener("click", function (event) {
+        const dialogRegistrationDate_updValue =
+          dialogRegistrationDate_upd.value;
+        const dialogStartDate_updValue = dialogStartDate_upd.value;
+        const dialogEndDate_updValue = dialogEndDate_upd.value;
+
+        // 入力値があるテキストボックスをチェック
+        if (
+          dialogRegistrationDate_updValue &&
+          !isValidDate(dialogRegistrationDate_updValue)
+        ) {
+          alert("EXXXX4:掲載日に入力された日時の形式が不正です。(YYYY-MM-DD)");
+          event.preventDefault(); // フォームの提出をキャンセル
+          return;
+        }
+
+        if (
+          dialogStartDate_updValue &&
+          !isValidDate(dialogStartDate_updValue)
+        ) {
+          alert(
+            "EXXXX4:適用開始日に入力された日時の形式が不正です。(YYYY-MM-DD)"
+          );
+          event.preventDefault(); // フォームの提出をキャンセル
+          return;
+        }
+
+        if (dialogEndDate_updValue && !isValidDate(dialogEndDate_updValue)) {
+          alert(
+            "EXXX4:適用終了日に入力された日時の形式が不正です。(YYYY-MM-DD)"
+          );
+          event.preventDefault(); // フォームの提出をキャンセル
+          return;
+        }
+
+        if (dialogStartDate_updValue && dialogEndDate_updValue) {
+          const startDate = new Date(dialogStartDate_updValue);
+          const endDate = new Date(dialogEndDate_updValue);
+          if (startDate > endDate) {
+            alert("EXXX5:開始日は終了日より遡及することはできません。");
+            event.preventDefault(); // フォームの提出をキャンセル
+            return;
+          }
+        }
+
+        // 年月日問題がなければフォームを提出
+        // updateForm.submit();
       });
 
       function updateSelectedRowBackground() {
@@ -740,11 +875,14 @@
         deleteform.submit(); // フォーム提出
       });
 
-      function checkInput() {
-        const title = document.getElementById("title");
-        const charCount = document.getElementById("charCount");
+      function checkInput(titleid) {
+        const title = document.getElementById(titleid);
+        // const charCount = document.getElementById("charCount");
+        let inputText = "";
+        if (title != null) {
+          inputText = title.value;
+        }
 
-        let inputText = title.value;
         let totalLength = 0; // 文字数計算
         let hankaku = 1;
         let zenkaku = 2;
