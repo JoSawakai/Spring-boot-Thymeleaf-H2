@@ -84,6 +84,7 @@ public class AnnouncementController {
         model.addAttribute("totalItems", oshiraselist.getTotalElements());
 
         model.addAttribute("title", title);
+        model.addAttribute("size", size);
         model.addAttribute("category", category); //漢字表記
         model.addAttribute("registrationDate", regDay);
         model.addAttribute("startDate", startDay);

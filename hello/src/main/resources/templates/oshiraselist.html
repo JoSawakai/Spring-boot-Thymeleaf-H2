@@ -66,9 +66,16 @@
         </div>
 
         <div>
+          <label for="size-select" class="label_input">検索表示件数：</label>
+          <select class="select_size" name="size" id="size-select">
+            <option value="10" th:selected="${size == 10}">10</option>
+            <!--デフォルト：10行-->
+            <option value="20" th:selected="${size == 20}">20</option>
+            <option value="30" th:selected="${size == 30}">30</option>
+          </select>
           <button
             type="submit"
-            class="input_btn sub_button_search"
+            class="input_btn_search sub_button_search"
             id="searchButton"
           >
             検索

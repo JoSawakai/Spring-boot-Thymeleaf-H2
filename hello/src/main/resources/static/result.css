@@ -60,6 +60,11 @@ select {
   padding: 5px;
 }
 
+.select_size {
+  width: 50px;
+  padding: 5px;
+}
+
 .label_input {
   display: inline-block;
   width: 150px;
@@ -354,6 +359,10 @@ caption {
 .input_btn {
   margin-left: 60vw; /* ボタンを右寄せ */
   display: block;
+}
+
+.input_btn_search {
+  margin-left: 42.5vw; /* ボタンを右寄せ */
 }
 
 /* ウインドウサイズ適用 */
