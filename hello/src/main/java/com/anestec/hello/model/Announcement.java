@@ -168,13 +168,13 @@ public class Announcement {
         this.updateTime = updateTime;
     }
 
-    // 通过 kubun 实体获取 displayName
+    // kubun から displayName　取得
     public String getDisplayName() {
         return categoryEntity != null ? categoryEntity.getDisplayName() : null;
     }
 
     public String getRegDayforTable() {
-        // 你可以在这里格式化日期，例如返回 yyyy/MM/dd 格式的日期
+        // 日時フォーマット
         if (this.registrationDate != null) {
             return this.registrationDate.substring(0, 4) + "/" + this.registrationDate.substring(4, 6) + "/" + this.registrationDate.substring(6, 8);
         }

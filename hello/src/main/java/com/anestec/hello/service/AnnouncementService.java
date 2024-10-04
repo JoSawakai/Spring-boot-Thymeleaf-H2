@@ -26,7 +26,7 @@ public class AnnouncementService {
 
     public Page<Announcement> getAllOshirase(Pageable pageable) {
         Specification<Announcement> spec = (root, query, criteriaBuilder) -> {
-            // 查询 delete_flg 不等于 "1" 的记录
+            //  delete_flg != "1" のレコードを検索
             // return criteriaBuilder.notEqual(root.get("deleteFlg"), "1");
             return criteriaBuilder.or(
                     criteriaBuilder.notEqual(root.get("deleteFlg"), "1"),
@@ -45,8 +45,8 @@ public class AnnouncementService {
 
     public List<String> getAllCategory() {
         return announcementRepository.findAll().stream()
-                .map(Announcement::getCategory) // 提取 Category 字段
-                .distinct() // 去除重复的邮箱
+                .map(Announcement::getCategory) //  Category を抽出
+                .distinct() // 重複もの削除
                 .collect(Collectors.toList());
     }
 
@@ -58,7 +58,7 @@ public class AnnouncementService {
     //         String infomessage, String deleteFlg, String createUser, String updateUser) {
     public void saveAnnouncement(String title, String category, String registrationDate, String startDate, String endDate,
             String infomessage, String createUser, String updateUser) {
-        // 将数据保存到数据库
+        // レコードをデータベースに保存
         Announcement announcement = new Announcement();
         announcement.setTitle(title);
         announcement.setCategory(category);
@@ -70,12 +70,12 @@ public class AnnouncementService {
         announcement.setCreateUser(createUser);
         announcement.setUpdateUser(updateUser);
 
-        announcementRepository.save(announcement);  // 保存到数据库
+        announcementRepository.save(announcement);  // 保存
     }
 
-    public void updateAnnouncement(Long id, String title, String category, String registrationDate, String startDate, String endDate) {
+    public void updateAnnouncement(Long id, String title, String category, String infomessage, String registrationDate, String startDate, String endDate) {
 
-        // 将数据保存到数据库
+        // レコードをデータベースに保存
         Announcement announcement = findById(id);
         if (announcement != null) {
 
@@ -84,24 +84,24 @@ public class AnnouncementService {
             announcement.setRegistrationDate(registrationDate);
             announcement.setStartDate(startDate);
             announcement.setEndDate(endDate);
-            // announcement.setInfomessage(infomessage);
+            announcement.setInfomessage(infomessage);
             // announcement.setDeleteFlg(deleteFlg);
             // announcement.setCreateUser(createUser);
             // announcement.setUpdateUser(updateUser);
 
-            announcementRepository.save(announcement);  // 保存到数据库
+            announcementRepository.save(announcement);  // 保存
         }
     }
 
     public void deleteAnnouncement(Long id) {
 
-        // 将数据保存到数据库
+        // レコードをデータベースに保存
         Announcement announcement = findById(id);
         if (announcement != null) {
 
             announcement.setDeleteFlg("1");
 
-            announcementRepository.save(announcement);  // 保存到数据库
+            announcementRepository.save(announcement);  // 保存
         }
     }
 
@@ -110,6 +110,6 @@ public class AnnouncementService {
     }
 
     // public void updateAnnouncement(Announcement announcement) {
-    //     announcementRepository.save(announcement);  // 保存更新后的记录
-    // }
+    //     announcementRepository.save(announcement);  // 保存
+// }
 }

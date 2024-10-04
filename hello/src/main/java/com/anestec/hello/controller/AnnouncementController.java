@@ -150,6 +150,7 @@ public class AnnouncementController {
             @RequestParam("id_upd") Long id,
             @RequestParam("dialogTitle_upd") String title,
             @RequestParam("dialogCategory_upd") String category_upd,
+            @RequestParam("dialogInfomessage_upd") String infomessage_upd,
             @RequestParam("dialogRegistrationDate_upd") String registrationDate_upd,
             @RequestParam("dialogStartDate_upd") String startDate_upd,
             @RequestParam("dialogEndDate_upd") String endDate_upd,
@@ -173,7 +174,7 @@ public class AnnouncementController {
         String sDate = LocalDate.parse(startDate_upd, inputDateFormatter).format(outputDateFormatter);
         String eDate = LocalDate.parse(endDate_upd, inputDateFormatter).format(outputDateFormatter);
 
-        announcementService.updateAnnouncement(id, title, category_upd, regDate, sDate, eDate);
+        announcementService.updateAnnouncement(id, title, category_upd, infomessage_upd, regDate, sDate, eDate);
 
         // System.out.println("Title: " + "  " + title);
         // System.out.println("Category: " + "  " + category_upd);

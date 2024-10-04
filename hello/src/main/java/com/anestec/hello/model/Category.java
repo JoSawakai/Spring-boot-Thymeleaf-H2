@@ -7,17 +7,17 @@ import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "CATEGORY", uniqueConstraints = @UniqueConstraint(columnNames = "KUBUN"))  // 为 KUBUN 添加唯一约束
+@Table(name = "CATEGORY", uniqueConstraints = @UniqueConstraint(columnNames = "KUBUN"))
 public class Category {
 
     @Id
-    private Long id;  // 主键
+    private Long id;  // 主キー
 
     @Column(nullable = false, name = "KUBUN")
-    private String category;  // 状态值，例如 0, 1, 5
+    private String category;
 
     @Column(nullable = false, name = "DISPLAYNAME")
-    private String displayName;  // 显示名称，例如 "无", "有", "恢复中"
+    private String displayName;
 
     // Getters and Setters
     public Long getId() {

@@ -65,7 +65,7 @@
           />
         </div>
 
-        <div>
+        <div style="width: 100%">
           <label for="size-select" class="label_input">検索表示件数：</label>
           <select class="select_size" name="size" id="size-select">
             <option value="10" th:selected="${size == 10}">10</option>
@@ -84,92 +84,110 @@
       </div>
     </form>
 
-    <table border="1">
-      <thead>
-        <tr>
-          <th colspan="4">
-            <a>検索結果</a>
-          </th>
-          <th>
-            <a
-              th:if="${currentPage > 0}"
-              th:href="@{/oshirase(page=0, title=${title}, category=${category}, registrationDate=${registrationDate}, startDate=${startDate}, endDate=${endDate})}"
-              style="font-size: 20px; text-decoration: none"
-            >
-              |&NestedLessLess;
-            </a>
-            <a
-              th:if="${currentPage > 0}"
-              th:href="@{/oshirase(page=${currentPage - 1}, title=${title}, category=${category}, registrationDate=${registrationDate}, startDate=${startDate}, endDate=${endDate})}"
-              style="font-size: 20px; text-decoration: none"
-            >
-              &lt;
-            </a>
-            <!-- <span
+    <div style="display: flex">
+      <table border="1">
+        <thead>
+          <tr>
+            <th colspan="4">
+              <a>検索結果</a>
+            </th>
+            <th>
+              <a
+                th:if="${currentPage > 0}"
+                th:href="@{/oshirase(page=0, title=${title}, category=${category}, registrationDate=${registrationDate}, startDate=${startDate}, endDate=${endDate})}"
+                style="font-size: 20px; text-decoration: none"
+              >
+                |&NestedLessLess;
+              </a>
+              <a
+                th:if="${currentPage > 0}"
+                th:href="@{/oshirase(page=${currentPage - 1}, title=${title}, category=${category}, registrationDate=${registrationDate}, startDate=${startDate}, endDate=${endDate})}"
+                style="font-size: 20px; text-decoration: none"
+              >
+                &lt;
+              </a>
+              <!-- <span
               th:text="'Page ' + (${currentPage} + 1) + ' / ' + ${totalPages}"
             ></span> -->
-            <span
-              th:text="${totalPages > 0} ? 'Page ' + (${currentPage} + 1) + ' / ' + ${totalPages} : 'Page 0 / 0'"
-            ></span>
-            <a
-              th:if="${currentPage < totalPages - 1}"
-              th:href="@{/oshirase(page=${currentPage + 1}, title=${title}, category=${category}, registrationDate=${registrationDate}, startDate=${startDate}, endDate=${endDate})}"
-              style="font-size: 20px; text-decoration: none"
-            >
-              &gt;
-            </a>
-            <a
-              th:if="${currentPage < totalPages - 1}"
-              th:href="@{/oshirase(page=${totalPages - 1}, title=${title}, category=${category}, registrationDate=${registrationDate}, startDate=${startDate}, endDate=${endDate})}"
-              style="font-size: 20px; text-decoration: none"
-            >
-              &NestedGreaterGreater;|
-            </a>
+              <span
+                th:text="${totalPages > 0} ? 'Page ' + (${currentPage} + 1) + ' / ' + ${totalPages} : 'Page 0 / 0'"
+              ></span>
+              <a
+                th:if="${currentPage < totalPages - 1}"
+                th:href="@{/oshirase(page=${currentPage + 1}, title=${title}, category=${category}, registrationDate=${registrationDate}, startDate=${startDate}, endDate=${endDate})}"
+                style="font-size: 20px; text-decoration: none"
+              >
+                &gt;
+              </a>
+              <a
+                th:if="${currentPage < totalPages - 1}"
+                th:href="@{/oshirase(page=${totalPages - 1}, title=${title}, category=${category}, registrationDate=${registrationDate}, startDate=${startDate}, endDate=${endDate})}"
+                style="font-size: 20px; text-decoration: none"
+              >
+                &NestedGreaterGreater;|
+              </a>
 
-            <span th:utext="'&nbsp;&nbsp;&nbsp;' + ${totalItems} + '件'"></span>
-          </th>
-        </tr>
-        <tr>
-          <th colspan="2" style="text-indent: 3em">お知らせタイトル</th>
-          <!-- <th>お知らせタイトル</th> -->
-          <th>お知らせ区分</th>
-          <th>掲載日</th>
-          <th>適用期間</th>
-          <!-- <th>id</th> -->
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          th:each="record : ${oshirase}"
-          th:data-id="${record.id}"
-          th:data-title="${record.title}"
-          th:data-category="${record.getDisplayName}"
-          th:data-regdate="${record.regDayforTable}"
-          th:data-startdate="${record.startDayforTable}"
-          th:data-enddate="${record.endDayforTable}"
-          th:data-deleteflg="${record.deleteFlg}"
-          th:attr="onclick='handleRowClick(this, event)'"
-          style="cursor: pointer"
-        >
-          <td class="td_1">
-            <input type="radio" name="selectedRecord" value="${record.id}" />
-          </td>
-          <td class="td_2" th:text="${record.title}"></td>
-          <td class="td_3" th:text="${record.getDisplayName}"></td>
+              <span
+                th:utext="'&nbsp;&nbsp;&nbsp;' + ${totalItems} + '件'"
+              ></span>
+            </th>
+          </tr>
+          <tr>
+            <th colspan="2" style="text-indent: 3em">お知らせタイトル</th>
+            <!-- <th>お知らせタイトル</th> -->
+            <th>お知らせ区分</th>
+            <th>掲載日</th>
+            <th>適用期間</th>
+            <!-- <th>id</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            th:each="record : ${oshirase}"
+            th:data-id="${record.id}"
+            th:data-title="${record.title}"
+            th:data-category="${record.getDisplayName}"
+            th:data-regdate="${record.regDayforTable}"
+            th:data-startdate="${record.startDayforTable}"
+            th:data-enddate="${record.endDayforTable}"
+            th:data-deleteflg="${record.deleteFlg}"
+            th:data-infomessage="${record.getInfomessage}"
+            th:attr="onclick='handleRowClick(this, event)'"
+            style="cursor: pointer"
+          >
+            <td class="td_1">
+              <input type="radio" name="selectedRecord" value="${record.id}" />
+            </td>
+            <td class="td_2" th:text="${record.title}"></td>
+            <td class="td_3" th:text="${record.getDisplayName}"></td>
 
-          <td class="td_4" th:text="${record.regDayforTable}"></td>
+            <td class="td_4" th:text="${record.regDayforTable}"></td>
 
-          <td
-            class="td_5"
-            th:text="${record.startDayforTable + ' ~ ' + record.endDayforTable}"
-          ></td>
-          <!-- <td th:text="${record.id}"></td> -->
-        </tr>
-        <tr th:if="${oshirase.size() == 0}">
-          <td colspan="6">EXXX2:検索対象が存在しません。</td>
-        </tr>
-      </tbody>
-    </table>
+            <td
+              class="td_5"
+              th:text="${record.startDayforTable + ' ~ ' + record.endDayforTable}"
+            ></td>
+            <!-- <td class="td_6" th:text="${record.getInfomessage}"></td> -->
+            <!-- <td th:text="${record.id}"></td> -->
+          </tr>
+          <tr th:if="${oshirase.size() == 0}">
+            <td colspan="6">EXXX2:検索対象が存在しません。</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table
+        style="margin-left: 10px; border: 1px solid black"
+        class="table_info"
+      >
+        <!-- 表格内容 -->
+        <td>
+          <p id="selected-info">
+            お知らせ内容を表示するには、左側のテーブルから行を選択してください。
+          </p>
+        </td>
+      </table>
+    </div>
 
     <button class="sub_button_reg" type="button" id="openDialogButton_reg">
       データ登録
@@ -327,6 +345,17 @@
               th:text="${dialogKubunItem.displayName}"
             ></option>
           </select>
+          <br /><br />
+
+          <label for="dialogInfomessage_upd" class="label_input_dia"
+            >お知らせ内容:
+            <span class="required-asterisk">*</span>
+          </label>
+          <textarea
+            id="dialogInfomessage_upd"
+            name="dialogInfomessage_upd"
+            required
+          ></textarea>
           <br /><br />
 
           <label for="dialogRegistrationDate_upd" class="label_input_dia"
@@ -684,6 +713,12 @@
 
           // 将选中行的背景颜色设置为蓝色
           selectedRow.style.backgroundColor = "#66CCFF";
+
+          var selectedInfoMessage = selectedRow.dataset.infomessage;
+          var infoContainer = document.getElementById("selected-info");
+          if (infoContainer) {
+            infoContainer.textContent = selectedInfoMessage;
+          }
         }
       }
 
@@ -739,6 +774,7 @@
             var id = selectedRow.getAttribute("data-id");
             var title = selectedRow.getAttribute("data-title");
             var category = selectedRow.getAttribute("data-category");
+            var infomessage = selectedRow.getAttribute("data-infomessage");
             var regDate = selectedRow.getAttribute("data-regdate");
             var startDate = selectedRow.getAttribute("data-startdate");
             var endDate = selectedRow.getAttribute("data-enddate");
@@ -759,6 +795,7 @@
 
             // データ転送
             document.getElementById("dialogTitle_upd").value = title;
+
             var select = document.getElementById("dialogCategory_upd");
             for (var i = 0; i < select.options.length; i++) {
               if (select.options[i].text === category) {
@@ -766,6 +803,10 @@
                 break;
               }
             }
+
+            document.getElementById("dialogInfomessage_upd").value =
+              infomessage;
+
             document.getElementById("dialogRegistrationDate_upd").value =
               formatDate(regDate);
             document.getElementById("dialogStartDate_upd").value =

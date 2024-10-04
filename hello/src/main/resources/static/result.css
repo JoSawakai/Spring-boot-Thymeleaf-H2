@@ -116,8 +116,8 @@ button {
 .sub_button_reg {
   font-size: 17px;
   width: 130px;
-  margin-top: 50px;
-  margin-bottom: 100px;
+  /* margin-top: 50px;
+  margin-bottom: 100px; */
   margin-left: 120px;
   padding: 5px 10px;
   border-radius: 5px;
@@ -140,8 +140,8 @@ button {
 .sub_button_upd {
   font-size: 17px;
   width: 130px;
-  margin-top: 50px;
-  margin-bottom: 100px;
+  /* margin-top: 50px;
+  margin-bottom: 100px; */
   margin-left: 120px;
   padding: 5px 10px;
   border-radius: 5px;
@@ -164,8 +164,8 @@ button {
 .sub_button_del {
   font-size: 17px;
   width: 130px;
-  margin-top: 50px;
-  margin-bottom: 100px;
+  /* margin-top: 50px;
+  margin-bottom: 100px; */
   margin-left: 120px;
   padding: 5px 10px;
   border-radius: 5px;
@@ -201,12 +201,20 @@ table {
   max-width: 1400px;
   border-collapse: collapse;
   margin-top: 0px;
+  margin-bottom: 50px;
 }
 
 @media (max-width: 1000px) {
   table {
     width: 100%; /* 画面サイズが1000未満の場合、表示拡大 */
   }
+}
+
+.table_info {
+  width: 30vw;
+  max-width: 600px;
+  border-collapse: collapse;
+  margin-top: 0px;
 }
 
 th,
@@ -362,7 +370,7 @@ caption {
 }
 
 .input_btn_search {
-  margin-left: 42.5vw; /* ボタンを右寄せ */
+  margin-left: 19.5vw; /* ボタンを右寄せ */
 }
 
 /* ウインドウサイズ適用 */
